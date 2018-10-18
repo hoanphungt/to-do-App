@@ -95,18 +95,21 @@
                 <label for="todo-2">Dust the vases</label>
             </li>
             <li class="todo">
-                    <input id="todo-3" type="checkbox" onchange="toggleDone.bind(this)();">
-                    <label for="todo-3">Clean the toilet</label>
+                <input id="todo-3" type="checkbox" onchange="toggleDone.bind(this)();">
+                <label for="todo-3">Clean the toilet</label>
             </li>
             <li class="todo">
-                    <input id="todo-4" type="checkbox" onchange="toggleDone.bind(this)();">
-                    <label for="todo-4">Vacuum the house</label>
+                <input id="todo-4" type="checkbox" onchange="toggleDone.bind(this)();">
+                <label for="todo-4">Vacuum the house</label>
             </li>
         </ul>
         <div class="footer">
             Todo: <span id="todo-count">1</span> •
             Done: <span id="completed-count">0</span> •
             Total: <span id="total-count">1</span>
+
+            <!-- link to clean up todos that are done -->
+            <a href="#" onclick="cleanUpDoneTodos(); return false">Clean up</a>
         </div>
     </div>
 
@@ -179,7 +182,7 @@
             function nextTodoId() {
                 return document.getElementsByClassName("todo").length + 1;
             };
-            
+
             var inputField = document.getElementById("new-todo");
             var newTodoTitle = inputField.value;
             createTodo(newTodoTitle);
@@ -191,6 +194,17 @@
             updateCounters();
         };
 
+        function cleanUpDoneTodos() {
+            var list = document.getElementById("todolist");
+            var doneItems = document.getElementsByClassName("completed");
+
+            // Reverse loop through the done todo items so we can remove them without changing the index of the remaining items when we remove them
+            for (var i = doneItems.length; i > 0; i--) {
+                list.removeChild(doneItems[i - 1]);
+            };
+
+            //   updateCounters();
+        };
         updateCounters();
 
     </script>
